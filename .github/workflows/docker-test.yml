@@ -13,11 +13,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build & Test Flask App
+      - name: Build Docker image
         run: |
           cd python-app
           docker build -t flask-hello .
-
+          
+      - name: Show Docker image size
+        run: |
+          echo "Docker Image Size"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          docker images flask-hello --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}" | tee image-size.txt
+          
+          # Extract just the size number (e.g., 82.5MB)
+          SIZE=$(docker images flask-hello --format "{{.Size}}" | head -1)
+          echo "Final image size: $SIZE"
+          
+      - name: Run container & test
+        run: |
           docker run -d -p 8080:8080 --name flask-test flask-hello
           sleep 8
 
