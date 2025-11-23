@@ -29,7 +29,12 @@ FROM python:3.12-slim
 
 # Create a normal non-root user (security best practice!)
 # Recent python:slim images removed "adduser", so we use useradd + groupadd
+# Clean up system caches in one layer = smaller image
 RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends ca-certificates; \
+    rm -rf /var/lib/apt/lists/*; \
+    \
     groupadd --gid 1000 appuser; \
     useradd --uid 1000 --gid appuser --shell /bin/bash --create-home appuser
 
