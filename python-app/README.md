@@ -9,7 +9,7 @@ Every time you push code, GitHub automatically:
 - Shows you the real **"Hello, World!"** output in the workflow logs
 
 GitOps/python-app/
-─ app.py
+- app.py
 - requirements.txt
 - Dockerfile
-  - .dockerignore
+- .dockerignore
