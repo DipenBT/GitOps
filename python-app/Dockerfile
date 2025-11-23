@@ -14,8 +14,10 @@ RUN pip install --user --no-cache-dir -r requirements.txt
 #----Final Stage ----
 FROM python:3.12-slim
 
-#Create a non-root user
-RUN adduser --disable-password --gecos '' appuser
+# Create non-root user the modern way (works on all current slim images)
+RUN set -eux; \
+    groupadd --gid 1000 appuser; \
+    useradd --uid 1000 --gid appuser --shell /bin/bash --create-home appuser
 
 WORKDIR /app
 COPY --from=builder /root/.local /home/appuser/.local
