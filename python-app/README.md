@@ -7,3 +7,9 @@ Every time you push code, GitHub automatically:
 - Runs the container
 - Hits `http://localhost:8080`
 - Shows you the real **"Hello, World!"** output in the workflow logs
+
+GitOps/python-app/
+├── app.py
+├── requirements.txt
+├── Dockerfile
+└── .dockerignore
