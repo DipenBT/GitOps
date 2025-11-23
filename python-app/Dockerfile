@@ -19,7 +19,7 @@ RUN adduser --disable-password --gecos '' appuser
 
 WORKDIR /app
 COPY --from=builder /root/.local /home/appuser/.local
-COPY app.py
+COPY app.py .
 
 # Make sure binaries are in PATH
 ENV PATH=/home/appuser/.local/bin:$PATH
